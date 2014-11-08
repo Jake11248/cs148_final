@@ -1,0 +1,259 @@
+/* CSS designed by Robert Erickson
+to understand the comments like 900px / 960px
+read http://alistapart.com/article/responsive-web-design/
+*/
+/***************** main layout section ************************/
+body{
+    margin: 36px auto;
+    width: 90%;
+    background-size: cover;
+
+}
+#page{
+    margin: 0 auto 53px;
+    width: 93.75%; /* 900px / 960px */
+    border: 1px solid black;
+    border-radius: 15px;
+}
+#main{
+    float: left;
+    width: 62.8888889%; /* 566px / 900px */
+}
+#other{
+    float: right;
+    width: 36.7777778%; /* 331px / 900px */
+}
+
+#main{
+    padding-top:7em;
+}
+
+#crud p{
+    max-width:80%;
+    margin: 0 auto;
+}
+
+h1{
+    text-align: center;
+    color: #00498E;
+    font-size: 50px;
+}
+
+h2{
+    text-align: center;
+}
+/***************** header section *****************************/
+header h1 {
+    padding: 0.8em 5.33333333%; /* 48px / 900px */
+}
+/***************** navigation section *****************************/
+
+#navigation{
+      width: 100%;
+      float: left;
+      margin: 0 0 3em 0;
+      padding: 0;
+      list-style: none !important;
+      background-color: #00498E;
+      border-bottom: 1px solid #ccc; 
+      border-top: 1px solid #ccc; }
+
+   #navigation li {
+      float: left; 
+   }
+   
+   #navigation li a {
+      display: block;
+      padding: 8px 15px;
+      text-decoration: none !important;
+      font-weight: bold;
+      color: #fff;
+      border-right: 1px solid #ccc; 
+      padding-left:20px
+          
+      
+   }
+   
+   #navigation li a:hover {
+      color: #00498E;
+      background-color: #fff; 
+   }
+
+
+
+
+
+
+
+
+
+/***************** article section ****************************/
+/* un comment and see what happens */
+/*
+article{
+height: 200px;
+overflow: auto;
+}
+*/
+article h1, article p, article table{
+    padding: .2em 8.48056537% .2em 8.48056537%; /* 48px / 566px */
+}
+/***************** aside section *****************************/
+aside {
+    margin: 0 auto;
+    width: 69.7885196%; /* 231px / 331px */
+}
+aside h2, aside p{
+    padding: .2em 8.48056537% .2em 8.48056537%; /* 48px / 566px */
+}
+/***************** footer section ****************************/
+footer{
+    clear: both;
+    padding: 0.8em 5.33333333%; /* 48px / 900px */
+}
+
+.footer p{
+    font-size: 19px;
+}
+
+
+
+
+
+/***************** form section ****************************/
+#form article#main, a, footer, p{
+}
+
+#form article#main{
+   float: none;
+    margin: 0 auto;
+    max-width: 800px;
+    
+}
+
+.wrapper{
+    
+}
+
+#txtEmail{
+    width:220px;
+    margin-left: 45px;
+}
+
+#txtUserName{
+    width:220px;
+    margin-top:10px;
+    margin-left:4px;
+}
+
+/* need to clear any floats that may exist */
+fieldset{
+    border: 1px solid #00498e;
+    clear: both;
+}
+/* just pushes content to left side of the box. */
+fieldset.search{
+    float: left;
+}
+/* when you look at the labels this pushes then next to the input and right
+aligns them. Display block means they are each on their own line. */
+fieldset.search label{
+    display: block;
+    text-align: right /* pushes the text to the right where they line up */
+        /* the float left above pushes everything back to the left*/
+}
+fieldset.search input, fieldset.search select{
+    width: 25em; /* works with above to be the same size for the boxes */
+}
+fieldset.buttons{
+    border: none;
+}
+fieldset.wrapper {
+    border: 0;
+    margin: auto;
+}
+fieldset.wrapper legend {
+    color: #00498e;
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+fieldset.wrapper > legend {
+    /* i only want the first legend ie if it follows the class wrapper */
+    font-size: 2em;
+}
+label {
+    color: #005cb3;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 18px;
+}
+/* style the errors in the form so they are visible */
+.mistake {
+    color: #fff;
+    background-color:#800;
+    border: thin solid #000;
+}
+/* style the list of errors that will show before the form */
+#errors ol li{
+    color: #ff5555;
+}
+
+.main_legend{
+    padding-bottom:15px;
+}
+
+input#btnSubmit{
+    width: 150px;
+    font-size: 30px;
+    height: 50px;
+    background-color: #00498E;
+    border-radius: 30px;
+    margin-top: 15px;
+    color: white;
+    font-family: san-serif;
+}
+
+input#btnSubmit:hover {
+      color: #00498E;
+      background-color: #fff; 
+   }
+
+
+
+/* table style */
+table{
+    border-collapse: collapse;
+}
+table, tr, td,th {
+    border-bottom: thin dashed black;
+    padding: .2em;
+}
+td:nth-child(4), td:nth-child(9){
+    text-align: center;
+}
+tr:nth-child(odd){
+    background:#ffffff;
+}
+tr:nth-child(even){
+    background: #ddffdd;
+} 
+tr:hover{
+    background: #008800;
+    color: #baeeba;
+}
+tbody{
+    /*   display:block;
+       height: 10em;
+       overflow: auto;*/
+}
+
+footer p {
+    font-size: small;
+}
+
+
+.crud{
+    
+}
