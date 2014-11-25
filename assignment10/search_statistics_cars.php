@@ -11,7 +11,7 @@ include "nav.php";
 // SECTION: 1a.
 // variables for the classroom purposes to help find errors.
 
-$debug = true;
+$debug = false;
 
 if (isset($_GET["debug"])) { // ONLY do this in a classroom environment
     $debug = true;
@@ -260,61 +260,14 @@ if (isset($_POST["btnSubmit"])) {
     if ($debug)
     print "<p>step 8 </p>";
     
-    //determien if they want only distinct vehicles or not and build the query with htis info 
-     //Distinct cars 
-   /*if ($Distinct != ''){
-   
-    //build the Query  
-        $query = 'SELECT  fldPerpCarMake AS Make, fldPerpCarColor AS Color, '; 
-        $query .= 'pmkPerpPlateState AS State ';
-        $query .= 'FROM tblPerpetrator JOIN tblIncident ';
-        $query .= 'ON tblPerpetrator.pmkPerpPlate = tblIncident.fnkPerpPlate ';
-        $query .= 'AND tblPerpetrator.pmkPerpPlateState = tblIncident.fnkPerpPlateState ';
-        
-        //Zip Code
-        $query .= 'WHERE fldPerpCarMake LIKE ? '; 
-        $data[] = $Make . "%";
-
-   //======If statements============
-        //street
-   if ($Color != ''){
-       $query .= 'AND fldPerpCarColor LIKE ? ';
-       $data[] = $Color . "%";
-   }
-   
-   //Time
-   if ($State != ''){
-       $query .= 'AND pmkPerpPlateState LIKE ? ';
-       $data[] = $State;
-   }
-   
-   //Injuries
-   if ($Injuries != ''){
-       $query .= 'AND fldInjuries LIKE ? ';
-       $data[] = $Injuries;
-   }
-   
-   //Injury Severity 
-   if ($InjSever != ''){
-       $query .= 'AND fldInjurySeverity LIKE ? ';
-       $data[] = $InjSever;
-   }
-   
-   //Distinct cars 
-   if ($Distinct != ''){
-       $query .= 'GROUP BY pmkPerpPlate, pmkPerpPlateState';
-   }
- }
-   
-   else{*/
        //build the Query  
         $query = 'SELECT  fldPerpCarMake AS Make, fldPerpCarColor AS Color, '; 
         $query .= 'pmkPerpPlateState AS State';
-             if ($Distinct = ''){
+             if ($Distinct == ''){
                  $query .= ', fldInjuries AS Injuries, ';
                  $query .= 'fldInjurySeverity AS "Injury Severity" ';
              }
-        $query .= 'FROM tblPerpetrator JOIN tblIncident ';
+        $query .= ' FROM tblPerpetrator JOIN tblIncident ';
         $query .= 'ON tblPerpetrator.pmkPerpPlate = tblIncident.fnkPerpPlate ';
         $query .= 'AND tblPerpetrator.pmkPerpPlateState = tblIncident.fnkPerpPlateState ';
         
@@ -351,7 +304,7 @@ if (isset($_POST["btnSubmit"])) {
    if ($Distinct != ''){
        $query .= 'GROUP BY pmkPerpPlate, pmkPerpPlateState';
    }
- //}
+
         
 //printing out the query and the array if debug is turned on 
 if ($debug){    
@@ -376,8 +329,13 @@ if ($debug){
 
     $numberRecords = count($results); 
 
+    if ($Distinct != ''){
+       print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " unique vehicles reported with these parameters</h2>"; 
+    }
     
-    print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with thes paramters</h2>";
+    else{
+        print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with these paramters</h2>";
+    }
     print"<h3> Refine your search below </h3>";
     
     
@@ -478,7 +436,7 @@ if ($debug){
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($Make == $row["pmkMake"]) print ' selected = "selected" ';
+                                if($Make == $row["pmkMake"]);
                                 print "$row[pmkMake]</option>";
                             }
                             ?>
@@ -514,7 +472,7 @@ if ($debug){
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($Color == $row["pmkColor"]) print ' selected = "selected" ';
+                                if($Color == $row["pmkColor"]);
                                 print "$row[pmkColor]</option>";
                             }
                             ?>
@@ -550,7 +508,7 @@ if ($debug){
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($State == $row["pmkStateName"]) print ' selected = "selected" ';
+                                if($State == $row["pmkStateName"]);
                                 print "$row[pmkStateName]</option>";
                             }
                             ?>
@@ -607,7 +565,7 @@ if ($debug){
 
                      foreach($results as $row){
                          print'<option> '; 
-                         if($InjSever == $row["fldSeverity"]) print ' selected = "selected" ';
+                         if($InjSever == $row["fldSeverity"]);
                          print "$row[fldSeverity]</option>";
                      }
                  ?>   

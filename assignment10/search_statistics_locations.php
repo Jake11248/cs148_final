@@ -430,7 +430,7 @@ if ($debug){
 
                            foreach($results as $row){
                                print'<option> '; 
-                               if($IncTime == $row["pmkTime"]) print ' selected = "selected" ';
+                               if($IncTime == $row["pmkTime"]);
                                print "$row[pmkTime]</option>";
                            }
                            ?>
@@ -487,7 +487,7 @@ if ($debug){
 
                      foreach($results as $row){
                          print'<option> '; 
-                         if($InjSever == $row["fldSeverity"]) print ' selected = "selected" ';
+                         if($InjSever == $row["fldSeverity"]);
                          print "$row[fldSeverity]</option>";
                      }
                  ?>   

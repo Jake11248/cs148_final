@@ -327,7 +327,7 @@ if ($debug){
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($State == $row["pmkStateName"]) print ' selected = "selected" ';
+                                if($State == $row["pmkStateName"]);
                                 print "$row[pmkStateName]</option>";
                             }
                             ?>

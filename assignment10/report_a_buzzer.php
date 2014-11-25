@@ -610,7 +610,7 @@ if (isset($_POST["btnSubmit"])) {
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($PerpCarMake == $row["pmkMake"]) print ' selected = "selected" ';
+                                if($PerpCarMake == $row["pmkMake"]);
                                 print "$row[pmkMake]</option>";
                             }
                             ?>
@@ -646,7 +646,7 @@ if (isset($_POST["btnSubmit"])) {
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($PerpCarColor == $row["pmkColor"]) print ' selected = "selected" ';
+                                if($PerpCarColor == $row["pmkColor"]);
                                 print "$row[pmkColor]</option>";
                             }
                             ?>
@@ -693,7 +693,7 @@ if (isset($_POST["btnSubmit"])) {
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($State == $row["pmkStateName"]) print ' selected = "selected" ';
+                                if($State == $row["pmkStateName"]);
                                 print "$row[pmkStateName]</option>";
                             }
                             ?>
@@ -767,7 +767,7 @@ if (isset($_POST["btnSubmit"])) {
 
                             foreach($results as $row){
                                 print'<option> '; 
-                                if($IncTime == $row["pmkTime"]) print ' selected = "selected" ';
+                                if($IncTime == $row["pmkTime"]) ;
                                 print "$row[pmkTime]</option>";
                             }
                             ?>
@@ -835,7 +835,7 @@ if (isset($_POST["btnSubmit"])) {
 
                     foreach($results as $row){
                         print'<option> '; 
-                        if($IncSeverity == $row["fldSeverity"]) print ' selected = "selected" ';
+                        if($IncSeverity == $row["fldSeverity"]);
                         print "$row[fldSeverity]</option>";
                     }
                 ?>   
