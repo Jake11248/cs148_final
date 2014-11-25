@@ -11,7 +11,7 @@ include "nav.php";
 // SECTION: 1a.
 // variables for the classroom purposes to help find errors.
 
-$debug = false;
+$debug = true;
 
 if (isset($_GET["debug"])) { // ONLY do this in a classroom environment
     $debug = true;
@@ -39,11 +39,12 @@ if ($debug)
 // in the order they appear on the form
 $data = array();
 
-$Zip = "";
-$Street = "";
-$Time = "";
+$Make = "";
+$Color = "";
+$State = "";
 $Injuries = "";
 $InjSever = "";
+$Distinct = "";
 
 if ($debug)
     print "<p>step 2</p>";
@@ -54,11 +55,12 @@ if ($debug)
 //
 // Initialize Error Flags one for each form element we validate
 // in the order they appear in section 1c.
-$ZipERROR = false;
-$StreetERROR = false;
-$TimeERROR = false;
+$MakeERROR = false;
+$ColorERROR = false;
+$StateERROR = false;
 $InjuriesERROR = false;
 $InjSeverERROR = false;
+$DistintERROR = false;
 
 if ($debug)
     print "<p>step 3</p>";
@@ -102,14 +104,14 @@ if (isset($_POST["btnSubmit"])) {
     // remove any potential JavaScript or html code from users input on the
     // form. Note it is best to follow the same order as declared in section 1c.
 
-    $Zip = htmlentities($_POST["txtZip"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $Zip;
+    $Make = htmlentities($_POST["lstMake"], ENT_QUOTES, "UTF-8");
+    $dataRecord[] = $Make;
     
-    $Street = htmlentities($_POST["txtStreet"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $Street;
+    $Color = htmlentities($_POST["lstColor"], ENT_QUOTES, "UTF-8");
+    $dataRecord[] = $Color;
 
-    $Time = htmlentities($_POST["lstTime"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $Time;
+    $State = htmlentities($_POST["lstState"], ENT_QUOTES, "UTF-8");
+    $dataRecord[] = $State;
   
     $Injuries = htmlentities($_POST["radInjuries"], ENT_QUOTES, "UTF-8");
     $dataRecord[] = $Injuries;
@@ -117,6 +119,8 @@ if (isset($_POST["btnSubmit"])) {
     $InjSever = htmlentities($_POST["lstInjSever"], ENT_QUOTES, "UTF-8");
     $dataRecord[] = $InjSever;
 
+    $Distinct = htmlentities($_POST["chkDistinct"], ENT_QUOTES, "UTF-8");
+    $dataRecord[] = $Distinct;
     
     if ($debug)
     print "<p>step 6/p>";
@@ -135,25 +139,25 @@ if (isset($_POST["btnSubmit"])) {
 
     
     //verify License Plate Number 
-    if ($Zip == "") {
+    if ($Make == "") {
     }
-        elseif (!verifyAlphaNum($Zip)) {
-        $errorMsg[] = "The zip code  appears to have unrecognized characters";
-        $ZipERROR = true;
-    }
-    
-     if ($Street == "") {
-    } elseif (!verifyAlphaNum($Street)) {
-        $errorMsg[] = "The street appears to have unrecognized characters.";
-        $StreetERROR = true;
+        elseif (!verifyAlphaNum($Make)) {
+        $errorMsg[] = "The car make  appears to have unrecognized characters";
+        $MakeERROR = true;
     }
     
-    
-    if ($Time == "") {
+     if ($Color == "") {
+    } elseif (!verifyAlphaNum($Color)) {
+        $errorMsg[] = "The car color appears to have unrecognized characters.";
+        $ColorERROR = true;
     }
-        elseif (!verifyTime($Time)) {
-        $errorMsg[] = "The Time appears to have unrecognized characters";
-        $TimeERROR = true;
+    
+    
+    if ($State == "") {
+    }
+        elseif (!verifyAlphaNum($State)) {
+        $errorMsg[] = "The State appears to have unrecognized characters";
+        $StateERROR = true;
     }
     
     
@@ -162,6 +166,13 @@ if (isset($_POST["btnSubmit"])) {
         elseif (!verifyAlphaNum($InjSever)) {
         $errorMsg[] = "The injury Severity selection appears to not be working";
         $InjSeverERROR = true;
+    }
+    
+     if ($Distinct == "") {
+    }
+        elseif (!verifyAlphaNum($Distinct)) {
+        $errorMsg[] = "You entered somethign worng into the distinct question";
+        $DistinctERROR = true;
     }
 
     if ($debug)
@@ -197,25 +208,26 @@ if (isset($_POST["btnSubmit"])) {
  
 
 <article id="main">
-       <aside id="searchLocationText"> 
+       <aside id="searchCarText"> 
         <h3>
             Want to play with the Numbers?
         </h3>
 
         <p>
-           So now you are thinking, should I ride on that road. Well here is a 
-           way to figure it out. You can search by any or all of the criteria below.
+          Want to figure out if your pre-conceive notion come true? Do Jersey drivers
+          "Buzz" more than Kentucky drivers? Is the term "Masshole" legitimate?
+          Should we be more careful when we see a black car coming up behind us
+          or is white the dangerous color? Is a Hummer more dangerous then a Toyota?
+          These are all things that you can learn with the information available
+          to you in the form below. 
         </p>
         
         <p>
-            Play with the numbers. See what roads around you are safe and which
-            are not. Figure out which roads you want to ride when. Decide if that 
-            5:00 ride is worth it or should you just go out tomorrow morning.
+            Play with the numbers and see what you can find. Remember to always
+            report your incidents of buzzing. The more we know the more you can 
+            learn!
         </p>
-        <h3>
-            Simply put here are the statistics that allow you to make an educated
-            decision about when and where you are going to ride. 
-        </h3>
+
    </aside>
     
     
@@ -248,27 +260,32 @@ if (isset($_POST["btnSubmit"])) {
     if ($debug)
     print "<p>step 8 </p>";
     
+    //determien if they want only distinct vehicles or not and build the query with htis info 
+     //Distinct cars 
+   /*if ($Distinct != ''){
+   
     //build the Query  
-        $query = 'SELECT  fnkZip AS Zip, fldIncStreet AS Street, fldIncDate AS "Incident Date", '; 
-        $query .= 'fldIncidentTime AS Time, fldInjuries AS Injuries, ';
-        $query .= 'fldInjurySeverity AS "Injury Severity"';
-        $query .= 'FROM tblIncident ';
+        $query = 'SELECT  fldPerpCarMake AS Make, fldPerpCarColor AS Color, '; 
+        $query .= 'pmkPerpPlateState AS State ';
+        $query .= 'FROM tblPerpetrator JOIN tblIncident ';
+        $query .= 'ON tblPerpetrator.pmkPerpPlate = tblIncident.fnkPerpPlate ';
+        $query .= 'AND tblPerpetrator.pmkPerpPlateState = tblIncident.fnkPerpPlateState ';
         
         //Zip Code
-        $query .= 'WHERE fldIncidentTime LIKE ? '; 
-        $data[] = $Time . "%";
+        $query .= 'WHERE fldPerpCarMake LIKE ? '; 
+        $data[] = $Make . "%";
 
    //======If statements============
         //street
-   if ($Street != ''){
-       $query .= 'AND fldIncStreet LIKE ? ';
-       $data[] = $Street . "%";
+   if ($Color != ''){
+       $query .= 'AND fldPerpCarColor LIKE ? ';
+       $data[] = $Color . "%";
    }
    
    //Time
-   if ($Zip != ''){
-       $query .= 'AND fnkZip LIKE ? ';
-       $data[] = $Zip;
+   if ($State != ''){
+       $query .= 'AND pmkPerpPlateState LIKE ? ';
+       $data[] = $State;
    }
    
    //Injuries
@@ -283,7 +300,58 @@ if (isset($_POST["btnSubmit"])) {
        $data[] = $InjSever;
    }
    
+   //Distinct cars 
+   if ($Distinct != ''){
+       $query .= 'GROUP BY pmkPerpPlate, pmkPerpPlateState';
+   }
+ }
    
+   else{*/
+       //build the Query  
+        $query = 'SELECT  fldPerpCarMake AS Make, fldPerpCarColor AS Color, '; 
+        $query .= 'pmkPerpPlateState AS State';
+             if ($Distinct = ''){
+                 $query .= ', fldInjuries AS Injuries, ';
+                 $query .= 'fldInjurySeverity AS "Injury Severity" ';
+             }
+        $query .= 'FROM tblPerpetrator JOIN tblIncident ';
+        $query .= 'ON tblPerpetrator.pmkPerpPlate = tblIncident.fnkPerpPlate ';
+        $query .= 'AND tblPerpetrator.pmkPerpPlateState = tblIncident.fnkPerpPlateState ';
+        
+        //Zip Code
+        $query .= 'WHERE fldPerpCarMake LIKE ? '; 
+        $data[] = $Make . "%";
+
+   //======If statements============
+        //street
+   if ($Color != ''){
+       $query .= 'AND fldPerpCarColor LIKE ? ';
+       $data[] = $Color . "%";
+   }
+   
+   //Time
+   if ($State != ''){
+       $query .= 'AND pmkPerpPlateState LIKE ? ';
+       $data[] = $State;
+   }
+   
+   //Injuries
+   if ($Injuries != ''){
+       $query .= 'AND fldInjuries LIKE ? ';
+       $data[] = $Injuries;
+   }
+   
+   //Injury Severity 
+   if ($InjSever != ''){
+       $query .= 'AND fldInjurySeverity LIKE ? ';
+       $data[] = $InjSever;
+   }
+   
+   //Distinct cars 
+   if ($Distinct != ''){
+       $query .= 'GROUP BY pmkPerpPlate, pmkPerpPlateState';
+   }
+ //}
         
 //printing out the query and the array if debug is turned on 
 if ($debug){    
@@ -382,60 +450,112 @@ if ($debug){
                     <legend>Fill in any or all of the following fields:</legend>
                     <fieldset class="form">
                         
-            <!-- Zip Code  --> 
-                         <label for="txtZip" class="required">Zip Code 
-                            <input type="text" id="txtZip" name="txtZip"
-                                   value="<?php print $Zip; ?>"
-                                   tabindex="100" maxlength="30" placeholder="Zip Code"
-                                   <?php if ($ZipERROR) print 'class="mistake"'; ?>
-                                   onfocus="this.select()"
-                                   >
-                         </label>
+            <!-- Make Code  --> 
+                         <label id="lstMake"> Car Make
+                        <select id="listMake" 
+                                name="lstMake" 
+                                tabindex="100" 
+                                size="1"> 
                         
-            <!-- Street -->
-                        <label for="txtStreet" class="required">Street  
-                            <input type="text" id="txtStreet" name="txtStreet"
-                                   value="<?php print $Street; ?>"
-                                   tabindex="110" maxlength="30" placeholder="Enter The Street"
-                                   <?php if ($StreetERROR) print 'class="mistake"'; ?>
-                                   onfocus="this.select()"
-                                   >
+                            <option>  </option>
+                            
+                             <?php 
+                           
+                            //write the query that will generate the list box 
+                            $query = 'SELECT DISTINCT pmkMake FROM tblMake ';
+                            $query .= 'where pmkMake not LIKE ""';
+                           
+                           if($debug){
+                           print "<p>SQL: " .$query;
+                           print "<p><pre>";
+                            
+                           var_dump($resuts);
+                           }
+                            
+                            
+                            //get eash row of the query and generate a list box element for it
+                             $results = $thisDatabase->select($query);
+
+                            foreach($results as $row){
+                                print'<option> '; 
+                                if($Make == $row["pmkMake"]) print ' selected = "selected" ';
+                                print "$row[pmkMake]</option>";
+                            }
+                            ?>
+
+                         </select>
                         </label>
                         
-            <!-- Time -->
-                       <label id="lstTime"> Time of Incident to the nearest Half Hour
-                       <select id="listTime" 
-                               name="lstTime" 
-                               tabindex="120" 
-                               size="1"> 
-
-                           <option>  </option>
-
-                            <?php 
-
-                           //write the query that will generate the list box 
-                           $query = 'SELECT DISTINCT pmkTime FROM tblTime ';
-                           $query .= 'where pmkTime not LIKE ""';
-
-                          if($debug){
-                          print "<p>SQL: " .$query;
-                          print "<p><pre>";
-
-                          var_dump($resuts);
-                          }
-
-
-                           //get eash row of the query and generate a list box element for it
-                            $results = $thisDatabase->select($query);
-
-                           foreach($results as $row){
-                               print'<option> '; 
-                               if($IncTime == $row["pmkTime"]) print ' selected = "selected" ';
-                               print "$row[pmkTime]</option>";
+            <!-- Color -->
+                        <label id="lstColor"> Car Color
+                        <select id="listColor" 
+                                name="lstColor" 
+                                tabindex="110" 
+                                size="1"> 
+                        
+                            <option>  </option>
+                            
+                             <?php 
+                           
+                            //write the query that will generate the list box 
+                            $query = 'SELECT DISTINCT pmkColor FROM tblColor ';
+                            $query .= 'where pmkColor not LIKE ""';
+                           
+                           if($debug){
+                           print "<p>SQL: " .$query;
+                           print "<p><pre>";
+                            
+                           var_dump($resuts);
                            }
-                           ?>
+                            
+                            
+                            //get eash row of the query and generate a list box element for it
+                             $results = $thisDatabase->select($query);
 
-                        </select>
+                            foreach($results as $row){
+                                print'<option> '; 
+                                if($Color == $row["pmkColor"]) print ' selected = "selected" ';
+                                print "$row[pmkColor]</option>";
+                            }
+                            ?>
+                   
+                         </select>
+                        </label>
+                        
+            <!-- License Plate State -->
+                       <label id="lstState"> License Plate State 
+                        <select id="listState" 
+                                name="lstState" 
+                                tabindex="120" 
+                                size="1"> 
+                        
+                            <option>  </option>
+                            
+                             <?php 
+                           
+                            //write the query that will generate the list box 
+                            $query = 'SELECT DISTINCT pmkStateName FROM tblState ';
+                            $query .= 'where pmkStateName not LIKE ""';
+                           
+                           if($debug){
+                           print "<p>SQL: " .$query;
+                           print "<p><pre>";
+                            
+                           var_dump($resuts);
+                           }
+                            
+                            
+                            //get eash row of the query and generate a list box element for it
+                             $results = $thisDatabase->select($query);
+
+                            foreach($results as $row){
+                                print'<option> '; 
+                                if($State == $row["pmkStateName"]) print ' selected = "selected" ';
+                                print "$row[pmkStateName]</option>";
+                            }
+                            ?>
+
+                         </select>
                      </label>
             
                    <!--Injuries Yes/No? -->
@@ -493,8 +613,17 @@ if ($debug){
                  ?>   
                 </select>
               </label>
-                   
-                     </fieldset> <!-- ends contact -->
+            
+          <!--Distinct cars? -->
+                        <label><input type="checkbox" 
+                                      id="chkDisitnctSelect" 
+                                      name="chkDistinct" 
+            <?php if ($Distinct) echo ' checked="checked" '; ?>
+                                      value="See only Distinct Vehicles" 
+                                      tabindex="200" 
+                                      > See only distinct vehicles? </label>
+                    
+                    </fieldset> <!-- ends contact -->
                     
                 </fieldset> <!-- ends wrapper Two -->
                 

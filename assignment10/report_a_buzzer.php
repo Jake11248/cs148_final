@@ -66,7 +66,7 @@ $PerpPlate = "";
 $PerpPlateState = "";
 
 //incident section of the form 
-$IncZip = " ";
+$IncZip = "";
 $IncStreet = "";
 $IncDate = "";
 $IncTime = "";
@@ -699,7 +699,7 @@ if (isset($_POST["btnSubmit"])) {
                             ?>
 
                          </select>
-                        
+                        </label>
                     </fieldset> <!-- ends information about  buzzer -->
                     
                     
