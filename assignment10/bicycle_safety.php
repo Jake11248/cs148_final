@@ -13,39 +13,54 @@ include "nav.php"
  ?>
 
     <h3>
-        Every year around <Strong>19,000</strong> cyclists are injured in car related accidents. Of 
-        these injuries around <strong>800</strong> result in deaths. 
+        The best way to prevent instances of being "buzzed" is to be seen
      </h3>
-        
+
+<img id= "carVsBike" src="https://jwarshaw.w3.uvm.edu/cs148/assignment10/bicyle_vs_car.jpg" alt="Bicycle vs Car Accident">
 <p>
-    Many of these accidents occur when drivers get too close to cyclists, when they 
-    'buzz' them. While there are many reason a driver may buzz a cyclist from anger 
-    at the cyclists to not paying attention, all of these buzzing's create an unsafe 
-    environment for cyclists. 
+   While it may be true that some of these buzzing issues come about because of 
+   angry motorists. Many of the issues also come about because of the difficulty 
+   of seeing a cyclist. So what can you do to be seen? 
 </p> 
 
-<p>
-    Now you may be wondering why very little is done to try and help prevent cyclists 
-    from being "buzzed." The simple reason is that there is no data recorded about 
-    buzzings. We record statistics on the outcome of these buzzings, deaths. But
-    there is not a centralized place to record these buzzings. This is where Buzzkiller
-    comes in. 
-</p>
-
-<p>
-    The goal of buzzkiller is to gain data about where these buzzings occur. Are 
-    certain drivers known for buzzing cyclists? Are certain streets more dangerous 
-    then others? Is there a certain time of day that is more dangerous than other 
-    times of day?
-</p>
-
 <h3>
-    Help us record this data and fix the issue, report being buzzed 
-    <a href="http://www.w3schools.com/html/">here</a>
+        The simplest way to be seen is to wear neon clothes and always ride 
+        with lights!
 </h3>
-        
-  
+
+<p>
+    Many cyclists think that neon clothes and lights are nudry. That wearing 
+    neon clothes makes them look "less pro" then those who do not wear them. The 
+    same feeling goes for lights. Many cyclists feel that lights are for "joeys".
+    But I ask the question, <strong>is looking "cool" or "pro" worth getting hit 
+        over?</strong> Simply put, I do not think it is. 
+</p>
+
+<p>
+    If you are wondering what I am talking about when I mention the neon clothes, 
+    they are essentially what they sound like, very bright bicycle clothes. Often 
+    they come as a best so you can wear it anytime of the year. An example of such 
+    a vest is below. You can find this type of cycling clothing at any bicycle shop. 
+</p>
+
+<img id= "cyclingVest" src="https://jwarshaw.w3.uvm.edu/cs148/assignment10/cycling_vest.JPG" alt="Neon Cyclign Vest">
+
+<p>
+    So now that we know what to wear, now how about lights? Lights are incredibly
+    helpful in being seen, especially at night. In fact, they are so helpful that 
+    some municipalities now require cyclists to use light after dusk and before dawn. 
+</p>
+
+<p>
+    The best configuration for lights is to have a white light on the front and 
+    a blinking red light on the back. Again, these lights can be found at any bicycle
+    shop or online. 
+</p>
     
+<img id= "bicycleLight" src="https://jwarshaw.w3.uvm.edu/cs148/assignment10/bicyle_light.jpg" 
+     alt="Neon Cyclign Vest"
+     width= "400">
+
 
 <?php
 include "footer.php";
