@@ -77,7 +77,7 @@
             print"<p>filename bicycle safety ran</p>";
         }
         
-         if ($path_parts['filename'] == "Report_a_buzzer") {
+         if ($path_parts['filename'] == "report_a_buzzer") {
             include "../lib/validation-functions.php";
             include "../lib/mail-message.php";
             require('../bin/myDatabase.php');
@@ -87,7 +87,13 @@
             print"<p>filename Report_a_buzzer ran</p>";
         }
         
-         if ($path_parts['filename'] == "search_statistics") {
+         if ($path_parts['filename'] == "search_statistics_locations") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+         if ($path_parts['filename'] == "search_statistics_cars") {
             include "../lib/validation-functions.php";
             include "../lib/mail-message.php";
             require('../bin/myDatabase.php');
@@ -106,6 +112,17 @@
         if ($debug) {
             print"<p>filename search_buzzer ran</p>";
         }
+        
+         if ($debug) {
+            print"<p>security ran</p>";
+        }
+        
+        if ($path_parts['filename'] == "bicycle_safety") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
         
         ?>	
 

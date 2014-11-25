@@ -40,6 +40,7 @@ if ($debug)
 $data = array();
 
 $licensePlate = "";
+$state = "";
 
 if ($debug)
     print "<p>step 2</p>";
@@ -51,6 +52,7 @@ if ($debug)
 // Initialize Error Flags one for each form element we validate
 // in the order they appear in section 1c.
 $licensePlateERROR = false;
+$stateERROR = false;
 
 if ($debug)
     print "<p>step 3</p>";
@@ -96,6 +98,9 @@ if (isset($_POST["btnSubmit"])) {
 
   $licensePlate = htmlentities($_POST["txtlicensePlate"], ENT_QUOTES, "UTF-8");
     $dataRecord[] = $licensePlate;
+    
+   $state = htmlentities($_POST["lstState"], ENT_QUOTES, "UTF-8");
+    $dataRecord[] = $state;
 
     if ($debug)
     print "<p>step 6/p>";
@@ -121,6 +126,15 @@ if (isset($_POST["btnSubmit"])) {
         elseif (!verifyAlphaNum($licensePlate)) {
         $errorMsg[] = "The license plate appears to have unrecognized characters";
         $licensePlateERROR = true;
+    }
+    
+    if ($state == "") {
+        $errorMsg[] = "Please enter the state of the license plate you are searching for";
+        $stateERROR = true;
+    }
+        elseif (!verifyAlphaNum($state)) {
+        $errorMsg[] = "The state appears to have unrecognized characters";
+        $stateERROR = true;
     }
 
     if ($debug)
@@ -188,12 +202,11 @@ if (isset($_POST["btnSubmit"])) {
     print "<p>step 8 </p>";
     
     //build the Query  
-        $query = 'SELECT COUNT pmkIncidentId '; 
-        $query .= 'FROM tblIncident JOIN tblPerpetrator ON tblIncident.fnkPerpId = tblPerpetrator.pmkPerpId ';
-        
-            //start Time
-        $query .= 'WHERE fldPerpPlate LIKE ? '; 
+        $query = 'SELECT  pmkIncId '; 
+        $query .= 'FROM tblIncident ';
+        $query .= 'WHERE fnkPerpPlate LIKE ? AND fnkPerpPlateState LIKE ?'; 
         $data[] = $licensePlate;
+        $data[] = $state;
 
 
 //pritn out the query and the array if debug is turned on 
@@ -220,7 +233,7 @@ if ($debug){
     $numberRecords = count($results); 
 
     
-    print "<h2>This license plate has been recorded " . $numberRecords . " times</h2>";
+    print "<h2 id='numBuzzTimes'>This license plate has been recorded ". $numberRecords . " times</h2>";
     print"<h3> Search for another buzzer below </h3>";
     
     
@@ -249,6 +262,20 @@ if ($debug){
     }
 
         ?>
+   <aside id="searchBuzzerText"> 
+        <h3>
+            Curious to see if your buzzer is a repeat offender?
+        </h3>
+
+        <p>
+           Maybe the person who buzzed you is a repeat offender. Or maybe you want to 
+           see if anyone you know has been reported as a buzzer. Maybe <strong>YOU</strong>
+           have been reported as a buzzer. There is only one way to find out. Simply 
+           put in the license plate number and state of the license plate you are looking 
+           for and <strong>WHOOOOOSH</strong> all the information you are looking for 
+           suddenly appears before your eyes. 
+        </p>
+   </aside>
 
         <form action="<?php print $phpSelf; ?>"
               method="post"
@@ -272,7 +299,42 @@ if ($debug){
                                    autofocus>
                         </label>
          
-                    </fieldset> <!-- ends contact -->
+                   
+                        <label id="lstState"> License Plate State 
+                        <select id="listState" 
+                                name="lstState" 
+                                tabindex="220" 
+                                size="1"> 
+                        
+                            <option>  </option>
+                            
+                             <?php 
+                           
+                            //write the query that will generate the list box 
+                            $query = 'SELECT DISTINCT pmkStateName FROM tblState ';
+                            $query .= 'where pmkStateName not LIKE ""';
+                           
+                           if($debug){
+                           print "<p>SQL: " .$query;
+                           print "<p><pre>";
+                            
+                           var_dump($resuts);
+                           }
+                            
+                            
+                            //get eash row of the query and generate a list box element for it
+                             $results = $thisDatabase->select($query);
+
+                            foreach($results as $row){
+                                print'<option> '; 
+                                if($State == $row["pmkStateName"]) print ' selected = "selected" ';
+                                print "$row[pmkStateName]</option>";
+                            }
+                            ?>
+
+                         </select>
+                            
+                     </fieldset> <!-- ends contact -->
                     
                 </fieldset> <!-- ends wrapper Two -->
                 

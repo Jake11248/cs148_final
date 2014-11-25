@@ -41,7 +41,7 @@ include "nav.php"
 
 <h3>
     Help us record this data and fix the issue, report being buzzed 
-    <a href="http://www.w3schools.com/html/">here</a>
+    <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/report_a_buzzer.php">here</a>
 </h3>
         
   
