@@ -3,15 +3,8 @@
 <?php
 include "top.php";
 ?>
-
-<h1>BuzzKiller</h1>
     
-<h2>Take Back the Roads</h2>
-    
-<?php
-include "nav.php"
- ?>
-
+<aside class="main_section">
     <p>
         Every year around <Strong>19,000</strong> cyclists are injured in car related accidents. Of 
         these injuries around <strong>800</strong> result in deaths. 
@@ -45,7 +38,7 @@ include "nav.php"
 </h3>
         
   
-    
+</aside>    
 
 <?php
 include "footer.php";

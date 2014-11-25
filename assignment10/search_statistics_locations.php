@@ -2,7 +2,7 @@
  
 <?php
 include "top.php";
-include "nav.php";
+
 
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
@@ -440,7 +440,7 @@ if ($debug){
             
                    <!--Injuries Yes/No? -->
 
-                     <label id="radInjuries"> Injuries?
+                   <label id="radInjuries"> Injuries? </label>
                                         <input 
                                             type="radio" 
                                             id="radYesInj" 
@@ -458,12 +458,12 @@ if ($debug){
                                             value="No" 
                                             tabindex="150"
                                             >No
-                    </label>     
+                      
                             
                 <!--Injuries severity 1 -10  -->
 
                     <label id="lstInjSever"> Severity of Injuries
-                         <select id="lstInjSever" 
+                         <select id="lstInjurySever" 
                                  name="lstInjSever" 
                                  tabindex="160" 
                                  size="1"> 

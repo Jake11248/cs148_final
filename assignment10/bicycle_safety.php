@@ -4,13 +4,6 @@
 include "top.php";
 ?>
 
-<h1>BuzzKiller</h1>
-    
-<h2>Take Back the Roads</h2>
-    
-<?php
-include "nav.php"
- ?>
 
     <h3>
         The best way to prevent instances of being "buzzed" is to be seen

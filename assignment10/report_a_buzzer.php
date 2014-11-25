@@ -19,8 +19,6 @@
 include "top.php";
 
 
-include "nav.php";
-
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
 // SECTION: 1 Initialize variables
@@ -659,7 +657,7 @@ if (isset($_POST["btnSubmit"])) {
                         <label for="txtPerpPlate" class="required">License Plate Number
                             <input type="text" id="txtPerpPlate" name="txtPerpPlate"
                                    value="<?php print $PerpPlate; ?>"
-                                   tabindex="230" maxlength="45" placeholder="Enter a valid License Plate Number"
+                                   tabindex="230" maxlength="15" placeholder="Enter a valid License Plate Number"
                                    <?php if ($PerpPlateERROR) print 'class="mistake"'; ?>
                                    onfocus="this.select()"
                                    >
@@ -787,7 +785,7 @@ if (isset($_POST["btnSubmit"])) {
                         
                         <!--Injuries Yes/No? -->
 
-                                    <label id="radInj"> Where There any Injuries?
+                                  <label id="radInj"> Where There any Injuries?  </label>
                                         <input 
                                             type="radio" 
                                             id="radYesInj" 
@@ -795,8 +793,9 @@ if (isset($_POST["btnSubmit"])) {
                 <?php if ($IncInj == "Yes") echo 'checked = "checked" '; ?>
                                             value="Yes" 
                                             tabindex="330" 
-                                            >Yes
-                                        
+                                            >Yes 
+                                   
+                              
                                         <input 
                                             type="radio" 
                                             id="radNoInj" 
@@ -805,13 +804,13 @@ if (isset($_POST["btnSubmit"])) {
                                             value="No" 
                                             tabindex="340"
                                             >No
-                                    </label>
+                                    
 
 
                        <!--Injuries severity 1 -10  -->
                        
                        <label id="lstIncInjSev"> Severity of Injuries
-                        <select id="lstIncInjSev" 
+                        <select id="lstIncInjSeverity" 
                                 name="lstIncInjSev" 
                                 tabindex="350" 
                                 size="1"> 

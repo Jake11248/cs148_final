@@ -2,7 +2,6 @@
  
 <?php
 include "top.php";
-include "nav.php";
 
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
@@ -289,17 +288,17 @@ if ($debug){
                     <fieldset class="contact">
                         <legend></legend>
                         
-                        <!-- search for license plate  --> 
+                <!--  license plate number --> 
                          <label for="txtlicensePlate" class="required">License Plate Number
-                            <input type="text" id="txtsubject" name="txtlicensePlate"
+                            <input type="text" id="txtlicensePlate" name="txtLicensePlate"
                                    value="<?php print $licensePlate; ?>"
-                                   tabindex="100" maxlength="45" placeholder="format - ell033 (no spaces)"
+                                   tabindex="230" maxlength="15" placeholder="Enter a valid License Plate Number"
                                    <?php if ($licensePlateERROR) print 'class="mistake"'; ?>
                                    onfocus="this.select()"
-                                   autofocus>
+                                   >
                         </label>
-         
-                   
+              
+              <!--License Plate State -->
                         <label id="lstState"> License Plate State 
                         <select id="listState" 
                                 name="lstState" 
@@ -333,6 +332,7 @@ if ($debug){
                             ?>
 
                          </select>
+                       </label>
                             
                      </fieldset> <!-- ends contact -->
                     
