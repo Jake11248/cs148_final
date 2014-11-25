@@ -127,6 +127,7 @@ aside {
     text-indent: 38px;
     color: #222;
 }
+
 aside h2, aside p{
     padding: .2em 8.48056537% .2em 8.48056537%; /* 48px / 566px */
 }
@@ -295,5 +296,29 @@ footer p {
 }
 
 
+/*=======style sfety page ======*/
+#safetyPageH3{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    color: #00498E;
+    font-style: italic;
+}
 
- 
+img#carVsBike {
+    float: left;
+    padding: 15px;
+    padding-top: 30px;
+}
+
+img#cyclingVest {
+    float: right;
+    padding: 15px;
+}
+
+img#bicycleLight {
+    width: 400px;
+    float: left;
+    padding: 15px;
+    padding-top:0px;
+}
