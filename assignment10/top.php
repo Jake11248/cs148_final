@@ -4,7 +4,7 @@
         <title>BuzzKiller</title>
         <meta charset="utf-8">
         <meta name="author" content="Jake Warshaw">
-        <meta name="description" content="Buzzkiller.">
+        <meta name="description" content="Buzzkiller - Creating safer roads for cyclist and cars">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
