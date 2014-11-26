@@ -308,8 +308,9 @@ if ($debug){
 
     $numberRecords = count($results); 
 
+    print"<br>";
     
-    print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with thes paramters</h2>";
+    print "<h1 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with these paramters</h1>";
     print"<h3> Refine your search below </h3>";
     
     

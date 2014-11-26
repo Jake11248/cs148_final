@@ -728,10 +728,10 @@ if (isset($_POST["btnSubmit"])) {
                         
                         
                         <!--Incident Date --> 
-                        <label for="txtIncDate" class="required">Date When The Incident Occurred 
+                        <label for="txtIncDate" class="required">Date When The Incident Occurred (Exactly YYYY-MM-DD)
                             <input type="text" id="txtIncDate" name="txtIncDate"
                                    value="<?php print $IncDate; ?>"
-                                   tabindex="310" maxlength="30" placeholder="Enter The Date of the Incident"
+                                   tabindex="310" maxlength="30" placeholder="format - YYYY-MM-DD"
                                    <?php if ($IncDateERROR) print 'class="mistake"'; ?>
                                    onfocus="this.select()"
                                    >

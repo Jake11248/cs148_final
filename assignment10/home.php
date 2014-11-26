@@ -6,8 +6,8 @@ include "top.php";
     
 <aside class="main_section">
     <p>
-        Every year around <Strong>19,000</strong> cyclists are injured in car related accidents. Of 
-        these injuries around <strong>800</strong> result in deaths. 
+        Every year approximately <Strong>19,000</strong> cyclists are injured in 
+        car related accidents. Of these injuries around <strong>800</strong> result in deaths. 
      </p>
         
 <p>

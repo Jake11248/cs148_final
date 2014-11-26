@@ -257,7 +257,14 @@ table{
 }
 table, tr, td,th {
     border-bottom: thin dashed black;
-    padding: .2em;
+    padding: .4em;
+}
+
+table{
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 39px;
+    border:6px solid;
 }
 td:nth-child(4), td:nth-child(9){
     text-align: center;
@@ -266,10 +273,10 @@ tr:nth-child(odd){
     background:#ffffff;
 }
 tr:nth-child(even){
-    background: #ddffdd;
+    background: #0070db;
 } 
 tr:hover{
-    background: #008800;
+    background: #00498E;
     color: #baeeba;
 }
 tbody{

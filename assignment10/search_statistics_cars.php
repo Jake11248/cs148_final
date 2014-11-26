@@ -327,13 +327,14 @@ if ($debug){
    //count numebr of records 
 
     $numberRecords = count($results); 
-
+    print "<br>";
+    
     if ($Distinct != ''){
-       print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " unique vehicles reported with these parameters</h2>"; 
+       print "<h1 id='numBuzzTimes'>There are ". $numberRecords . " unique vehicles reported with these parameters</h1>"; 
     }
     
     else{
-        print "<h2 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with these paramters</h2>";
+        print "<h1 id='numBuzzTimes'>There are ". $numberRecords . " occurances of buzzing with these paramters</h1>";
     }
     print"<h3> Refine your search below </h3>";
     

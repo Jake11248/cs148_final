@@ -127,6 +127,7 @@ if (isset($_POST["btnSubmit"])) {
         $licensePlateERROR = true;
     }
     
+    
     if ($state == "") {
         $errorMsg[] = "Please enter the state of the license plate you are searching for";
         $stateERROR = true;
@@ -232,7 +233,7 @@ if ($debug){
     $numberRecords = count($results); 
 
     
-    print "<h2 id='numBuzzTimes'>This license plate has been recorded ". $numberRecords . " times</h2>";
+    print "<h1 id='numBuzzTimes'>This license plate has been recorded ". $numberRecords . " times</h2>";
     print"<h3> Search for another buzzer below </h3>";
     
     
@@ -290,7 +291,7 @@ if ($debug){
                         
                 <!--  license plate number --> 
                          <label for="txtlicensePlate" class="required">License Plate Number
-                            <input type="text" id="txtlicensePlate" name="txtLicensePlate"
+                            <input type="text" id="txtlicensePlate" name="txtlicensePlate"
                                    value="<?php print $licensePlate; ?>"
                                    tabindex="230" maxlength="15" placeholder="Enter a valid License Plate Number"
                                    <?php if ($licensePlateERROR) print 'class="mistake"'; ?>
@@ -302,7 +303,7 @@ if ($debug){
                         <label id="lstState"> License Plate State 
                         <select id="listState" 
                                 name="lstState" 
-                                tabindex="220" 
+                                tabindex="250" 
                                 size="1"> 
                         
                             <option>  </option>
