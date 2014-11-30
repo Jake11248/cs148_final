@@ -1,6 +1,5 @@
 <?php
 
-
 /* %^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
  * the purpose of this page is to display a list of poets sorted 
  * 
@@ -34,17 +33,26 @@ if ($debug) {
 
 // %^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 // print out the results
-print "<ol>\n";
+
+print"<h1> Admin Prefrences - edit or delete records </h1>";
+print"<h2> Reporter Table </h2>";
+
+print"<br>";
+
+print"<h2> To add a new Reporter, please add an entire incident in the form found <a href='https://jwarshaw.w3.uvm.edu/cs148/assignment10/report_a_buzzer.php'> here </a></h2>";
+
+
+print "<ul>\n";
 
 foreach ($reporter as $reporter) {
 
     print "<li>";
     if ($admin) {
-        print '<a href="form.php?id=' . $reporter["pmkRepEmail"] . '">[Edit]</a> ';
+        print '<a href="admin_reporter_form.php?id=' . $reporter["pmkRepEmail"] . '">[Edit]</a> ';
     }
     print $reporter['fldRepFName'] . " " . $reporter['fldRepLName'] . "  -  " . $reporter['pmkRepEmail'] . "</li>\n";
 }
-print "</ol>\n";
+print "</ul>\n";
 print "</article>";
 include "footer.php";
 ?>

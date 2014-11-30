@@ -112,15 +112,26 @@
         if ($debug) {
             print"<p>filename search_buzzer ran</p>";
         }
-        
-         if ($debug) {
-            print"<p>security ran</p>";
-        }
+          
         
         if ($path_parts['filename'] == "bicycle_safety") {
             include "../lib/validation-functions.php";
             include "../lib/mail-message.php";
             require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename bicycle safety ran</p>";
+        }
+        
+        if ($path_parts['filename'] == "admin_index") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+       if ($debug) {
+            print"<p>filename admin_index ran</p>";
         }
         
          if ($path_parts['filename'] == "admin_reporter") {
@@ -129,7 +140,14 @@
             require('../bin/myDatabase.php');
         }
         
+        if ($debug) {
+            print"<p>filename admin_reporter ran</p>";
+        }
         
+        
+         if ($debug) {
+            print"<p>security ran</p>";
+        }
         ?>	
 
     </head>

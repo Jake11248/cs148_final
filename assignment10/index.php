@@ -19,7 +19,7 @@
 
     <body id="mainIndex">
          <header>
-            <h1> Jacob Warshaw: CS 148 </h1>
+            <h1> BuzzKiller WebPages </h1>
         </header>
             <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment1.0/tables.php"> Specification Doc </a> </li>
             <li> <a href="https://github.com/Jake11248/cs148_final/tree/master/assignment10"> Git Hub Repository </a> </li>
@@ -29,7 +29,10 @@
             <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/search_statistics_locations.php"> Search Statistics of Location </a></li>
             <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/search_statistics_cars.php">  Search Statistics of Cars </a></li>
             <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/bicycle_safety.php"> Bicycle Safety </a></li>
-            <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/bicycle_safety.php"> Admin page </a></li>
+            <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_reporter.php"> Admin page - Index </a></li>
+            <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_reporter.php"> Admin page - Reporter </a></li>
+            <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_reporter.php"> Admin page - Buzzer </a></li>
+            <li> <a href="https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_reporter.php"> Admin page - Incident </a></li>
 
     </body>
 </html>
