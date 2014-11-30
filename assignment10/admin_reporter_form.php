@@ -1,6 +1,5 @@
 <?php
-/* the purpose of this page is to display a form to allow a poet and allow us
- * to add a new poet or update an existing poet 
+/* 
  * 
  * Written By: Robert Erickson robert.erickson@uvm.edu
  * Last updated on: November 20, 2014
@@ -10,7 +9,7 @@
 include "top.php";
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
-$debug = true;
+$debug = false;
 if (isset($_GET["debug"])) { // create a debugging environment
     $debug = false;
 }
@@ -174,6 +173,10 @@ if (isset($_POST["btnSubmit"])) {
             $query = 'DELETE FROM tblReporter WHERE pmkRepEmail = ? ';
             $data1[] = $pmkRepEmail;
             $results = $thisDatabase->update($query, $data1);
+            //$dataEntered = $thisDatabase->db->commit();
+            
+            $query1 = 'DELETE FROM tblIncident WHERE fnkRepEmail = ? ';
+            $results1 = $thisDatabase->update($query1, $data1);
             $dataEntered = $thisDatabase->db->commit();
         }
         
@@ -238,6 +241,12 @@ if (isset($_POST["btnSubmit"])) {
 // to display the form.
     if ($dataEntered) { // closing of if marked with: end body submit
         print "<h1>Record Saved</h1> ";
+        print"<ul>";
+        print"<p><a href='https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_reporter.php'> Edit Another Reporter Record </a></p>";
+        print"<p><a href='https://jwarshaw.w3.uvm.edu/cs148/assignment10/admin_index.php'> Return to Admin Index Page </a></p>";
+        print"<p><a href='https://jwarshaw.w3.uvm.edu/cs148/assignment10/home.php'> Return Home </a></p>";
+        print"</ul>";
+        
     } else {
 //####################################
 //
@@ -273,7 +282,8 @@ if (isset($_POST["btnSubmit"])) {
               method="post"
               id="frmRegister">
             <fieldset class="wrapper">
-                <legend>Edit Reporter Record</legend>
+                <fieldset>
+                <legend>Edit or Add Reporter Record</legend>
                 
                 <!--New Record? -->
                <label><input type="checkbox" 
@@ -335,10 +345,9 @@ if (isset($_POST["btnSubmit"])) {
                                    > Delete Record? </label>        
                        
             </fieldset> <!-- ends contact -->
-            </fieldset> <!-- ends wrapper Two -->
             <fieldset class="buttons">
                 <legend></legend>
-                <input type="submit" id="btnSubmit" name="btnSubmit" value="Change!!" tabindex="900" class="button">
+                <input type="submit" id="btnSubmit" name="btnSubmit" value="Submit" tabindex="900" class="button">
             </fieldset> <!-- ends buttons -->
             </fieldset> <!-- Ends Wrapper -->
         </form>

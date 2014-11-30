@@ -15,19 +15,19 @@ include "top.php";
 print "<article>";
 // %^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 // prepare the sql statement
-$orderBy = "ORDER BY fldRepLName";
+$orderBy = "ORDER BY pmkPerpPlate";
 
-$query  = "SELECT pmkRepEmail, fldRepFName, fldRepLName, fnkRepZip ";
-$query .= "FROM tblReporter " . $orderBy;
+$query  = "SELECT pmkPerpPlate, pmkPerPlateState, fldPerpCarMake, fldPerpCarColor ";
+$query .= "FROM tblPerpetrator " . $orderBy;
 
 if ($debug)
     print "<p>sql " . $query;
 
-$reporter = $thisDatabase->select($query);
+$buzzer = $thisDatabase->select($query);
 
 if ($debug) {
     print "<pre>";
-    print_r($reporter);
+    print_r($buzzer);
     print "</pre>";
 }
 
@@ -43,13 +43,13 @@ print"<br>";
 
 print "<ul>\n";
 
-foreach ($reporter as $reporter) {
+foreach ($buzzer as $buzzer) {
 
     print "<li>";
     if ($admin) {
-        print '<a href="admin_reporter_form.php?id=' . $reporter["pmkRepEmail"] . '">[Edit]</a> ';
+        print '<a href="admin_reporter_form.php?id=' . $buzzer["pmkPerpPlate"] . $buzzer["pmkPerpPlateState"] . '">[Edit]</a> ';
     }
-    print $reporter['fldRepFName'] . " " . $reporter['fldRepLName'] . "  -  " . $reporter['pmkRepEmail'] . "</li>\n";
+    print $buzzer['pmkPerpPlate'] . " " . $buzzer['pmkPerpPlateState'] . "  -  " . $buzzer['fldPerpCarColor'] . $buzzer['fldPerpCarMake'] . "</li>\n";
 }
 print "</ul>\n";
 print "</article>";

@@ -288,8 +288,6 @@ if (isset($_POST["btnSubmit"])) {
     
    
     if ($IncDesc == "") {
-  //      $errorMsg[] = "Please enter the description of the incident";
-  //      $IncDescERROR = true;
     } elseif (!verifyAlphaNum($IncDesc)) {
         $errorMsg[] = "The description of the incident appears to be incorrect.";
         $IncDescERROR = true;
@@ -304,16 +302,7 @@ if (isset($_POST["btnSubmit"])) {
         $IncInjERROR = true;
     }
     
-   /* 
-    if ($IncInjSev == "") {
-        $errorMsg[] = "Please enter the severity of the injuries";
-        $IncInjSevERROR = true;
-    } elseif (!verifyAlphaNum($IncInjSev)) {
-        $errorMsg[] = "The injury serverity seems to be incorrect.";
-        $IncInjSevERROR = true;
-    }
-    
-   */
+
     if ($IncTime == "") {
         $errorMsg[] = "Please enter the time the buzzing took place";
         $IncTimeERROR = true;
