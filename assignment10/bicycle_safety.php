@@ -38,7 +38,7 @@ include "top.php";
     neon clothes makes them look "less pro" then those who do not wear them. The 
     same feeling goes for lights. Many cyclists feel that lights are for "joeys".
     But I ask the question, <strong>is looking "cool" or "pro" worth getting hit 
-        over?</strong> Simply put, I do not think it is. 
+        over?</strong> Simply put, it is not! 
 </p>
 
 <p>

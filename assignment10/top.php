@@ -123,6 +123,12 @@
             require('../bin/myDatabase.php');
         }
         
+         if ($path_parts['filename'] == "admin_reporter") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
         
         ?>	
 
