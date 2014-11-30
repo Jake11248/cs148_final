@@ -10,7 +10,7 @@
 include "top.php";
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
-$debug = true;
+$debug = false;
 if (isset($_GET["debug"])) { // create a debugging environment
     $debug = false;
 }
@@ -19,8 +19,6 @@ if ($debug)
 //
 // SECTION: 1 Initialize variables
 $update = false;
-$deleteRecord = false;
-
 // SECTION: 1a.
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
@@ -40,21 +38,16 @@ if (isset($_GET["id"])) {
     $pmkRepEmail = htmlentities($_GET["id"], ENT_QUOTES, "UTF-8");
     $query = 'SELECT pmkRepEmail, fldRepFName, fldRepLName, fnkRepZip ';
     $query .= 'FROM tblReporter WHERE pmkRepEmail = ?';
-    
     $results = $thisDatabase->select($query, array($pmkRepEmail));
-    
     $email = $results[0]['pmkRepEmail'];
     $firstName = $results[0]["fldRepFName"];
     $lastName = $results[0]["fldRepLName"];
     $zip = $results[0]["fnkRepZip"];
-    $new = "";
-    
 } else {
     $email = "";
     $firstName = "";
     $lastName = "";
     $zip = "";
-    $new ="";
 }
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
@@ -66,7 +59,6 @@ $emailERROR = false;
 $firstNameERROR = false;
 $lastNameERROR = false;
 $zipERROR = false;
-$newERROR = false;
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
 // SECTION: 1e misc variables
@@ -74,7 +66,6 @@ $newERROR = false;
 // create array to hold error messages filled (if any) in 2d displayed in 3c.
 $errorMsg = array();
 $data = array();
-$data1 = array();
 $dataEntered = false;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //
@@ -96,34 +87,20 @@ if (isset($_POST["btnSubmit"])) {
 // SECTION: 2b Sanitize (clean) data
 // remove any potential JavaScript or html code from users input on the
 // form. Note it is best to follow the same order as declared in section 1c.
- 
-    $pmkRepEmail = htmlentities($_POST["hidRepEmail"], ENT_QUOTES, "UTF-8");
-    
-    $new = htmlentities($_POST["chkNew"], ENT_QUOTES, "UTF-8");
-    if ($new == "") {
+    $pmkRepEmail = htmlentities($_POST["txtEmail"], ENT_QUOTES, "UTF-8");
+    if ($pmkRepEmail != "") {
         $update = true;
     }
-   
-    $delete = htmlentities($_POST["chkDelete"], ENT_QUOTES, "UTF-8");
-    if ($delete != "") {
-        $deleteRecord = true;
-    }
-    
     // I am not putting the ID in the $data array at this time
     $email= htmlentities($_POST["txtEmail"], ENT_QUOTES, "UTF-8");
     $data[] = $email;
     
     $firstName = htmlentities($_POST["txtFirstName"], ENT_QUOTES, "UTF-8");
     $data[] = $firstName;
-    
     $lastName = htmlentities($_POST["txtLastName"], ENT_QUOTES, "UTF-8");
     $data[] = $lastName;
-    
     $zip = htmlentities($_POST["txtZip"], ENT_QUOTES, "UTF-8");
     $data[] = $zip;
-    
-    
-    
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //
 // SECTION: 2c Validation
@@ -169,49 +146,33 @@ if (isset($_POST["btnSubmit"])) {
 // SECTION: 2e Save Data
 //
         $dataEntered = false;
-        if($deleteRecord) {
+        try {
             $thisDatabase->db->beginTransaction();
-            $query = 'DELETE FROM tblReporter WHERE pmkRepEmail = ? ';
-            $data1[] = $pmkRepEmail;
-            $results = $thisDatabase->update($query, $data1);
-            $dataEntered = $thisDatabase->db->commit();
-        }
-        
-            try {
-                $thisDatabase->db->beginTransaction();
-                if ($update) {
-                    $query = 'UPDATE tblReporter SET ';
-                } else {
-                    $query = 'INSERT INTO tblReporter SET ';
+            if ($update) {
+                $query = 'UPDATE tblReporter SET ';
+            } else {
+                $query = 'INSERT INTO tblReporter SET ';
+            }
+            $query .= 'pmkRepEmail = ?, ';
+            $query .= 'fldRepFName = ?, ';
+            $query .= 'fldRepLName = ?, ';
+            $query .= 'fnkRepZip = ? ';
+            if ($update) {
+                $query .= 'WHERE pmkRepEmail = ?';
+                $data[] = $pmkRepEmail;
+                
+                $results = $thisDatabase->update($query, $data);
+            } else {
+                $results = $thisDatabase->insert($query, $data);
+                $primaryKey = $thisDatabase->lastInsert();
+                if ($debug) {
+                    print "<p>pmk= " . $primaryKey;
                 }
-                $query .= 'pmkRepEmail = ?, ';
-                $query .= 'fldRepFName = ?, ';
-                $query .= 'fldRepLName = ?, ';
-                $query .= 'fnkRepZip = ? ';
-                if ($update) {
-                    $query .= 'WHERE pmkRepEmail = ?';
-                    $data[] = $pmkRepEmail;
-
-                    $results = $thisDatabase->update($query, $data);
-                } else {
-                    $results = $thisDatabase->insert($query, $data);
-                    $primaryKey = $thisDatabase->lastInsert();
-                    if ($debug) {
-                        print "<p>pmk= " . $primaryKey;
-                    }
-                }
+            }
             // all sql statements are done so lets commit to our changes
             $dataEntered = $thisDatabase->db->commit();
-            
-            if ($debug){    
-                print "<p>SQL: " .$query;
-                print "<p><pre>";
-                print_r($data);
-                print"</pre></p>";  
+            if ($debug)
                 print "<p>transaction complete ";
-                print $new;
-            }
-            
         } catch (PDOExecption $e) {
             $thisDatabase->db->rollback();
             if ($debug)
@@ -273,21 +234,8 @@ if (isset($_POST["btnSubmit"])) {
               method="post"
               id="frmRegister">
             <fieldset class="wrapper">
-                <legend>Edit Reporter Record</legend>
-                
-                <!--New Record? -->
-               <label><input type="checkbox" 
-                                  id="chkNew" 
-                                   name="chkNew" 
-            <?php if ($new) echo ' checked="checked" '; ?>
-                                   value="Is this a New Record?" 
-                                   tabindex="30" 
-                                   > Is this a New Record? </label> 
-        
-                <!--hidden field to get the PMK --> 
-                       <input type="hidden" id="hidRepEmail" name="hidRepEmail"
-                       value="<?php print $pmkRepEmail; ?>"
-                       >
+                <legend>Poets</legend>
+
                 
                 <label for="txtEmail" class="required">Email
                     <input type="text" id="txtEmail" name="txtEmail"
@@ -323,17 +271,7 @@ if (isset($_POST["btnSubmit"])) {
                            <?php if ($zipERROR) print 'class="mistake"'; ?>
                            onfocus="this.select()"
                            >
-                </label> 
-                       
-                <!--Delete Record?-->
-                     <label><input type="checkbox" 
-                                  id="chkDelete" 
-                                   name="chkDelete" 
-            <?php if ($delete) echo ' checked="checked" '; ?>
-                                   value="Delete Record" 
-                                   tabindex="200" 
-                                   > Delete Record? </label>        
-                       
+                </label>                
             </fieldset> <!-- ends contact -->
             </fieldset> <!-- ends wrapper Two -->
             <fieldset class="buttons">

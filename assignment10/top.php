@@ -57,6 +57,16 @@
             print"<p>security ran</p>";
         }
         
+       if ($path_parts['filename'] == "index") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename index ran</p>";
+        }
+        
         if ($path_parts['filename'] == "home") {
             include "../lib/validation-functions.php";
             include "../lib/mail-message.php";
@@ -142,6 +152,56 @@
         
         if ($debug) {
             print"<p>filename admin_reporter ran</p>";
+        }
+        
+        if ($path_parts['filename'] == "admin_reporter_form") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename admin_reporter_form ran</p>";
+        }
+        
+          if ($path_parts['filename'] == "admin_buzzer") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename admin_buzzer ran</p>";
+        }
+        
+        if ($path_parts['filename'] == "admin_buzzer_form") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename admin_buzzer_form ran</p>";
+        }
+        
+          if ($path_parts['filename'] == "admin_incident") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename admin_incident ran</p>";
+        }
+        
+        if ($path_parts['filename'] == "admin_incident_form") {
+            include "../lib/validation-functions.php";
+            include "../lib/mail-message.php";
+            require('../bin/myDatabase.php');
+        }
+        
+        if ($debug) {
+            print"<p>filename admin_incident_form ran</p>";
         }
         
         

@@ -1,7 +1,7 @@
 <?php
 
 /* %^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
- * the purpose of this page is to display a list of poets sorted 
+ * the purpose of this page is to display a list of reporters sorted 
  * 
  * Written By: Robert Erickson robert.erickson@uvm.edu
  * Last updated on: November 20, 2014
@@ -34,7 +34,7 @@ if ($debug) {
 // %^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 // print out the results
 
-print"<h1> Admin Prefrences - edit or delete records </h1>";
+print"<h1> Admin Prefrences - Add, edit or delete records </h1>";
 print"<h2> Reporter Table </h2>";
 
 print"<br>";
