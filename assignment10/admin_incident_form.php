@@ -9,7 +9,7 @@
 include "top.php";
 //%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%^%
 //
-$debug = true;
+$debug = false;
 if (isset($_GET["debug"])) { // create a debugging environment
     $debug = false;
 }
@@ -44,7 +44,7 @@ if (isset($_GET["id"])) {
     
     $results = $thisDatabase->select($query, array($pmkIncId));
     
-    $Inczip = $results[0]["fnkZip"];
+    $IncZip = $results[0]["fnkZip"];
     $IncStreet = $results[0]["fldIncStreet"];
     $IncDate = $results[0]["fldIncDate"];
     $IncTime = $results[0]["fldIncidentTime"];
@@ -117,25 +117,29 @@ if (isset($_POST["btnSubmit"])) {
     
     // I am not putting the ID in the $data array at this time
     $IncZip = htmlentities($_POST["txtIncZip"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncZip;
+    $data[] = $IncZip;
     
     $IncStreet = htmlentities($_POST["txtIncStreet"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncStreet;
+    $data[] = $IncStreet;
     
     $IncDate = htmlentities($_POST["txtIncDate"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncDate;
+    $data[] = $IncDate;
     
     $IncTime = htmlentities($_POST["lstIncTime"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncTime;
+    $data[] = $IncTime;
         
+
     $IncDesc = htmlentities($_POST["txtIncDesc"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncDesc;
+    //    $data[] = $IncDesc;
+    
     
     $IncInj = htmlentities($_POST["radInj"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncInj;
+    //$data[] = $IncInj;
     
+
     $IncInjSev = htmlentities($_POST["lstIncInjSev"], ENT_QUOTES, "UTF-8");
-    $dataRecord[] = $IncInjSev;
+      //  $data[] = $IncInjSev;
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //
 // SECTION: 2c Validation
@@ -222,10 +226,10 @@ if (isset($_POST["btnSubmit"])) {
 
         }
         
-        else{
        
             try {
                 $thisDatabase->db->beginTransaction();
+                
                 if ($update) {
                     $query = 'UPDATE tblIncident SET ';
                 } else {
@@ -235,9 +239,21 @@ if (isset($_POST["btnSubmit"])) {
                 $query .= 'fldIncStreet = ?, ';
                 $query .= 'fldIncDate = ?, ';
                 $query .= 'fldIncidentTime = ?, ';
-                $query .= 'fldIncDescription = ?, ';
-                $query .= 'fldInjuries = ?, ';
-                $query .= 'fldInjurySeverity = ? ';
+                
+                if ($IncDesc !=""){ 
+                    $query .= 'fldIncDescription = ?, ';
+                    $data[] = $IncDesc;
+                }
+                                
+                if ($IncInj !=""){
+                    $query .= 'fldInjuries = ?, ';
+                    $data[] = $IncInj;
+                }
+                
+                if($IncInjSev != ""){
+                    $query .= 'fldInjurySeverity = ? ';
+                    $data [] = $IncInjSev;
+                }
      
                 if ($update) {
                     $query .= 'WHERE pmkIncId = ?';
@@ -247,6 +263,7 @@ if (isset($_POST["btnSubmit"])) {
                     
                 } else {
                     $results = $thisDatabase->insert($query, $data);
+                    
                     $primaryKey = $thisDatabase->lastInsert();
                     if ($debug) {
                         print "<p>pmk= " . $primaryKey;
@@ -270,7 +287,7 @@ if (isset($_POST["btnSubmit"])) {
                 print "Error!: " . $e->getMessage() . "</br>";
             $errorMsg[] = "There was a problem with accpeting your data please contact us directly.";
         }
-        }
+        
     } // end form is valid
 } // ends if form was submitted.
 //#############################################################################
@@ -332,6 +349,10 @@ if (isset($_POST["btnSubmit"])) {
     <p> Make sure to have all required fields - Zip, Street, date, time, if there
         were injuries - populated before submitting any changes. </p>
     
+    <p> Currently this form is not properly updating the fields - It is for 
+        deleting current records only. The query works correctly but it will not
+    properly submit to the database </p>
+    
         <form action="<?php print $phpSelf; ?>"
               method="post"
               id="frmRegister">
@@ -339,10 +360,14 @@ if (isset($_POST["btnSubmit"])) {
                      <fieldset class="wrapper"> 
                         <legend>Information About The Incident</legend>
                         
+                        <input type="hidden" id="hidIncId" name="hidIncId"
+                       value="<?php print $pmkIncId; ?>"
+                       >
+                        
                         <!--Incident Zip --> 
                         <label for="txtIncZip" class="required">Zip Code Where Incident Occurred 
-                            <input type="text" id="txtIncZip" name="txtIncZip
-"                                   value="<?php print $IncZip; ?>"
+                            <input type="text" id="txtIncZip" name="txtIncZip"
+                                   value="<?php print $IncZip; ?>"
                                    tabindex="300" maxlength="30" placeholder="Enter The Zip Code of the Incident"
                                    <?php if ($IncZipERROR) print 'class="mistake"'; ?>
                                    onfocus="this.select()"
